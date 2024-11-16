@@ -36,7 +36,8 @@ fun Route.createItem(dataSource: ItemDataSource){
         val itemRequest = call.receive<Item>()
         val item = Item(
             name = itemRequest.name,
-            category = itemRequest.category
+            category = itemRequest.category,
+            description = itemRequest.description
         )
         val result = dataSource.createItem(item)
         if(result){

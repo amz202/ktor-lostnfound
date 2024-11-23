@@ -10,5 +10,5 @@ data class Item(
     val category:String,
     val description:String,
     @BsonId val id:ObjectId = ObjectId(),
-    val foundAt:Instant = Instant.now()
+    val foundAt: String = Instant.now().toString()
 )

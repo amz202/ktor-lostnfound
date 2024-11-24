@@ -50,13 +50,12 @@ fun Route.createItem(dataSource: ItemDataSource){
 
 fun Route.deleteItem(dataSource: ItemDataSource){
     delete("/delete-item"){
-//        val name = call.parameters["name"]
-//        if (name == null) {
-//            call.respond(HttpStatusCode.BadRequest, "Missing item name")
-//            return@delete
-//        }
-        val itemRequest = call.receive<ItemRequest>()
-        val item = dataSource.deleteItem(itemRequest.name)
+        val name = call.parameters["name"]
+        if (name == null) {
+            call.respond(HttpStatusCode.BadRequest, "Missing item name")
+            return@delete
+        }
+        val item = dataSource.deleteItem(name)
         if(item){
             call.respond(HttpStatusCode.OK,"Item deleted")
         }else{

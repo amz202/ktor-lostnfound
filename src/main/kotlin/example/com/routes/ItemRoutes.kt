@@ -2,6 +2,7 @@ package example.com.routes
 
 import example.com.data.ItemDataSource
 import example.com.data.model.Item
+import example.com.data.request.ClaimRequest
 import example.com.data.request.ItemRequest
 import io.ktor.http.*
 import io.ktor.server.request.*
@@ -65,5 +66,13 @@ fun Route.deleteItem(dataSource: ItemDataSource){
         }else{
             call.respond(HttpStatusCode.InternalServerError,"Couldn't delete item")
         }
+    }
+}
+
+fun Route.claimItem(dataSource: ItemDataSource) {
+    post("/claim-item") {
+        val claimRequest = call.receive<ClaimRequest>()
+        val result = dataSource.claimItem(claimRequest)
+        call.respond(HttpStatusCode.OK, result)
     }
 }
